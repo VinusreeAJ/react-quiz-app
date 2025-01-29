@@ -166,3 +166,38 @@ a.secondary {
     filter: invert();
   }
 }
+
+.title {
+  font-size: 5rem;
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(45deg, #ff6f61, #f4a261);
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(45deg, #007bff, #6f42c1);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background: linear-gradient(45deg, #0056b3, #4c2a85);
+  transform: translateY(-3px);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
