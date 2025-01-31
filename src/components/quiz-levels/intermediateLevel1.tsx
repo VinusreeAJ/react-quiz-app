@@ -20,6 +20,7 @@ const questions = [
 ];
 
 export default function IntermediateLevel1({ startQuiz }: { startQuiz: boolean }) {
+
   const dispatch = useDispatch();
   const router = useRouter();
 

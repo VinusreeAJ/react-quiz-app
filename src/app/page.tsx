@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 
 import { toggleModal } from "@/store/modules/userDetails";
 import styles from "@/app/page.module.css";
+import { usePageTitle } from "@/hooks/use-title";
 
 export default function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
+  usePageTitle('HomePage');
 
   const handleGoToQuizzes = () => {
     dispatch(toggleModal(true));

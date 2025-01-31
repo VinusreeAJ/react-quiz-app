@@ -5,6 +5,7 @@ import { Card, CardContent, Button, Typography } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import { motion } from "framer-motion";
 import styles from "@/app/page.module.css";
+import { usePageTitle } from "@/hooks/use-title";
 
 const quizzes = [
   { id: "easy", title: "Easy", background: "/assets/images/animebg2.jpeg" },
@@ -16,7 +17,9 @@ const quizzes = [
 ];
 
 export default function Quizzes() {
+
   const router = useRouter();
+  usePageTitle('Quiz Levels')
 
   const handleStartQuiz = (id: string) => {
     router.push(`/quizzes/${id}`);

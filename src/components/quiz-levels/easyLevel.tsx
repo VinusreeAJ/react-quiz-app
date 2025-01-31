@@ -19,11 +19,13 @@ const questions = [
 ];
 
 export default function EasyLevel({ startQuiz }: { startQuiz: boolean }) {
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(15);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const dispatch = useDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     if (startQuiz && timer > 0 && selectedAnswer === null) {
