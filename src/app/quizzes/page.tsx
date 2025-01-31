@@ -1,15 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Button, Typography } from "@mui/material";
+import Grid from '@mui/material/Grid2';
 import { motion } from "framer-motion";
-import "swiper/css";
-import "swiper/css/effect-coverflow";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
 import styles from "@/app/page.module.css";
 
 const quizzes = [
@@ -46,31 +40,22 @@ export default function Quizzes() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         sx={{
           fontWeight: "bold",
-          color: "#ff4081",
+          background: "linear-gradient(90deg, #ff4081, #ff80ab)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
           textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
         }}
       >
         QuizBuzz
       </Typography>
 
-      <Swiper
-        effect="coverflow"
-        loop
-        grabCursor
-        centeredSlides
-        slidesPerView="auto"
-        coverflowEffect={{ rotate: 30, stretch: 0, depth: 150, modifier: 1, slideShadows: true }}
-        navigation
-        pagination={{ clickable: true }}
-        modules={[EffectCoverflow, Navigation, Pagination]}
-        className="quizSwiper"
-      >
+      <Grid container spacing={3} justifyContent="center" sx={{ mt: 3 }}>
         {quizzes.map((quiz) => (
-          <SwiperSlide key={quiz.id}>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={quiz.id}>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.95 }}>
               <Card
                 sx={{
-                  height: 350,
+                  height: 300,
                   textAlign: "center",
                   p: 2,
                   backgroundImage: `url(${quiz.background})`,
@@ -83,6 +68,12 @@ export default function Quizzes() {
                   alignItems: "center",
                   boxShadow: "0 8px 20px rgba(0, 0, 0, 0.6)",
                   borderRadius: "20px",
+                  backdropFilter: "blur(10px)",
+                  transition: "0.3s",
+                  '&:hover': {
+                    transform: "scale(1.05)",
+                    boxShadow: "0 12px 30px rgba(0, 0, 0, 0.8)",
+                  },
                 }}
               >
                 <CardContent>
@@ -102,9 +93,9 @@ export default function Quizzes() {
                 </CardContent>
               </Card>
             </motion.div>
-          </SwiperSlide>
+          </Grid>
         ))}
-      </Swiper>
+      </Grid>
     </motion.div>
   );
 }

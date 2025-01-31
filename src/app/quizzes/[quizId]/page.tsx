@@ -16,9 +16,23 @@ export default function QuizPage() {
 
   const { userName, avatarUrl, modalOpen } = useSelector((state: RootState) => state.user);
 
+  // Define background images based on quiz levels
+  const getBackgroundImage = () => {
+    switch (quizId) {
+      case "easy":
+        return '/assets/images/animeBg.jpeg';
+      case "intermediate-1":
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const backgroundImage = getBackgroundImage();
+
   return (
     <div style={{
-        backgroundImage: `url("/assets/images/animeBg.jpeg")`,
+      ...(backgroundImage ? { backgroundImage: `url("${backgroundImage}")` } : {}),
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',

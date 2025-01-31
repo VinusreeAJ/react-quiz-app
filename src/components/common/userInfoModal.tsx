@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserName, setAvatarUrl, toggleModal } from "@/store/modules/userDetails";
-import { Modal, Box, TextField, Button, Avatar, Grid2, Typography } from "@mui/material";
+import { Modal, Box, TextField, Button, Avatar, Typography } from "@mui/material";
 import { RootState } from "@/store";
+import { motion } from "framer-motion";
 
 const UserInfoModal = () => {
   const dispatch = useDispatch();
@@ -24,10 +25,9 @@ const UserInfoModal = () => {
     }
   }, [modalOpen, dispatch]);
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (userName.trim() === "") return;
-
     dispatch(toggleModal(false));
   };
 
@@ -37,59 +37,106 @@ const UserInfoModal = () => {
 
   return (
     <Modal open={modalOpen} onClose={() => dispatch(toggleModal(false))}>
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: 300,
-          bgcolor: "background.paper",
-          color: 'black',
-          boxShadow: 24,
-          p: 4,
-          borderRadius: 2,
-          display: "flex",
-          flexDirection: "column",
-          gap: 2,
-        }}
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -50 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: 'black' }}
       >
-        <Typography variant="h6">Enter Your Details</Typography>
-        <TextField
-          label="User Name"
-          variant="outlined"
-          fullWidth
-          required
-          value={userName}
-          onChange={(e) => dispatch(setUserName(e.target.value))}
-        />
-        <Typography variant="body1">Choose an Avatar:</Typography>
-        <Grid2 container spacing={2}>
-          {defaultAvatars.map((avatar, index) => (
-            <Grid2 key={index}>
-              <Avatar
-                src={avatar}
-                sx={{
-                  width: 60,
-                  height: 60,
-                  cursor: "pointer",
-                  border: avatarUrl === avatar ? "2px solid #3f51b5" : "none",
-                  transition: "transform 0.2s",
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                  },
-                }}
-                onClick={() => handleAvatarClick(avatar)}
-              />
-            </Grid2>
-          ))}
-        </Grid2>
-        <Button type="submit" variant="contained" fullWidth>
-          Save
-        </Button>
-      </Box>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            width: 350,
+            bgcolor: "white",
+            boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)",
+            p: 4,
+            borderRadius: 3,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            textAlign: "center",
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>Enter Your Details</Typography>
+
+          {/* Custom Styled Input */}
+          <TextField
+            label="User Name"
+            variant="outlined"
+            fullWidth
+            required
+            sx={{
+              bgcolor: "#f5f5f5",
+              borderRadius: 2,
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#ccc" },
+                "&:hover fieldset": { borderColor: "#3f51b5" },
+                "&.Mui-focused fieldset": { borderColor: "#3f51b5" },
+              },
+            }}
+            value={userName}
+            onChange={(e) => dispatch(setUserName(e.target.value))}
+          />
+
+          <Typography variant="body1" sx={{ fontWeight: "bold" }}>Choose an Avatar:</Typography>
+          
+          {/* Avatar Grid */}
+          <motion.div
+            className="avatar-container"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "10px",
+              justifyContent: "center",
+              padding: "10px",
+            }}
+          >
+            {defaultAvatars.map((avatar, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Avatar
+                  src={avatar}
+                  sx={{
+                    width: 60,
+                    height: 60,
+                    cursor: "pointer",
+                    border: avatarUrl === avatar ? "3px solid #3f51b5" : "2px solid transparent",
+                    transition: "border 0.2s ease-in-out",
+                  }}
+                  onClick={() => handleAvatarClick(avatar)}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Animated Button */}
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                background: "linear-gradient(135deg, #3f51b5 30%, #6573c3 90%)",
+                color: "white",
+                fontWeight: "bold",
+                borderRadius: 3,
+                padding: "10px",
+                "&:hover": {
+                  background: "linear-gradient(135deg, #3549a1 30%, #5c6bc0 90%)",
+                },
+              }}
+            >
+              Save
+            </Button>
+          </motion.div>
+        </Box>
+      </motion.div>
     </Modal>
   );
 };
