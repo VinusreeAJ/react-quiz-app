@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
-import { Button, Card, CardContent, Typography, Paper, Box, Avatar } from "@mui/material";
+import { Button, CardContent, Typography, Paper } from "@mui/material";
 import { motion } from "framer-motion";
 
 import { setAnswer } from "@/store/modules/quizUserInfo";

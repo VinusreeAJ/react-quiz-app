@@ -15,7 +15,7 @@ export default function Results() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
   // Retrieve state from Redux
-  const { answers, score, timeTaken } = useSelector((state: RootState) => state.quizUserInfo);
+  const { answers, score } = useSelector((state: RootState) => state.quizUserInfo);
   const { userName, avatarUrl } = useSelector((state: RootState) => state.user);
 
   // Update confetti size dynamically
@@ -33,7 +33,7 @@ export default function Results() {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       className={styles.container}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -45,8 +45,8 @@ export default function Results() {
       )}
 
       {/* Enhanced Results Card */}
-      <Card 
-        className={styles.resultCard} 
+      <Card
+        className={styles.resultCard}
         sx={{
           maxWidth: 500,
           mx: "auto",
@@ -60,7 +60,7 @@ export default function Results() {
       >
         <CardContent>
           {/* Title with Animation */}
-          <motion.div 
+          <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -72,16 +72,16 @@ export default function Results() {
 
           {/* User Info */}
           <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
-            <Avatar 
-              src={avatarUrl} 
-              alt={userName} 
-              sx={{ width: 80, height: 80, mb: 1, border: "3px solid #ff758c" }} 
+            <Avatar
+              src={avatarUrl}
+              alt={userName}
+              sx={{ width: 80, height: 80, mb: 1, border: "3px solid #ff758c" }}
             />
             <Typography variant="h5" fontWeight="bold">{userName}</Typography>
           </Box>
 
           {/* Score Display */}
-          <Box 
+          <Box
             sx={{
               backgroundColor: score > 40 ? "#4CAF50" : "#FF5722",
               color: "white",
@@ -99,7 +99,7 @@ export default function Results() {
 
           {/* Total Time Taken */}
           <Typography variant="body1" fontWeight="bold" color="textSecondary" mb={2}>
-            ⏳ Total Time Taken: {timeTaken} seconds
+            ⏳ Total Time Taken: {answers.map((item) => (item.timeTaken))} seconds
           </Typography>
 
           {/* Detailed Answer Breakdown */}
@@ -112,13 +112,13 @@ export default function Results() {
           </Box>
 
           {/* Restart Quiz Button */}
-          <motion.div 
+          <motion.div
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.05 }}
           >
-            <Button 
-              variant="contained" 
-              fullWidth 
+            <Button
+              variant="contained"
+              fullWidth
               sx={{
                 mt: 3,
                 py: 1.5,
