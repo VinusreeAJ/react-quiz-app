@@ -1,70 +1,79 @@
-.quiz-box {
-    background: linear-gradient(135deg, #1e293b, #3b82f6);
-    border-radius: 16px;
-    padding: 20px;
-    color: white;
-    text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    margin: auto;
-  }
-  
-  .quiz-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .timer {
-    font-size: 18px;
-    color: #facc15;
-    margin-bottom: 10px;
-  }
-  
-  .options-container {
+.quiz-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* background: radial-gradient(circle, #222 20%, #444 100%); */
   }
-  
+
+  .quiz-box {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 60%;
+  }
+
+  .quiz-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .timer {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+
+  .options-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    height: 150px;
+    margin-top: 20px;
+  }
+
   .option-button {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid transparent;
-    color: white;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 8px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    border: none;
+    font-size: 1.2rem;
     cursor: pointer;
-    transition: 0.3s;
+    font-weight: bold;
+    color: white;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
   }
-  
+
   .option-button:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, #ff8e53, #ff6b6b);
   }
-  
-  .option-button.selected {
-    background: #facc15;
-    color: #1e293b;
+
+  .selected {
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    box-shadow: 0px 0px 20px rgba(76, 175, 80, 0.6);
   }
-  
+
   .next-button {
-    background: #22c55e;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    background: #2196f3;
     color: white;
     border: none;
-    padding: 12px;
-    font-size: 18px;
-    border-radius: 8px;
     cursor: pointer;
-    margin-top: 15px;
-    transition: 0.3s;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
   }
-  
+
   .next-button:disabled {
-    background: #64748b;
+    background: gray;
     cursor: not-allowed;
   }
-  
-  .next-button:hover:not(:disabled) {
-    background: #16a34a;
-  }
-  
